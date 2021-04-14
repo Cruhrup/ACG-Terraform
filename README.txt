@@ -47,6 +47,4 @@ Will add network flow to this note later
 
 
 
-#Network Diagram
-
-![](images/AWS%20Terraform%20Deployment%20(ACG).jpeg)
+#Network Diagram available in "images" folder
