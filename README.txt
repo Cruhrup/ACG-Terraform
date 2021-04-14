@@ -32,3 +32,21 @@ Will add network flow to this note later
 
 
 #Security_groups.tf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Network Diagram
+
+<img src = "images/AWS Terraform Deployement (ACG).jpg" width = 400>
