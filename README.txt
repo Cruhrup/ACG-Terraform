@@ -49,4 +49,4 @@ Will add network flow to this note later
 
 #Network Diagram
 
-<img src = "images/AWS Terraform Deployement (ACG).jpg" width = 400>
+<img src="images/AWS%20Terraform%20Deployment%20(ACG).jpeg" width="400">
