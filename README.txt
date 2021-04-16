@@ -32,3 +32,19 @@ Will add network flow to this note later
 
 
 #Security_groups.tf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Network Diagram available in "images" folder
