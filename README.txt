@@ -1,5 +1,6 @@
 
 AWS CLI installed via pip
+AWS SDK installed via pip
 Ansible installed via pip
 Ansible base config link: https://raw.githubusercontent.com/linuxacademy/content-deploying-to-aws-ansible-terraform/master/aws_la_cloudplayground_version/ansible.cfg
 Terraform link: https://releases.hashicorp.com/terraform/0.12.29/terraform_0.12.29_linux_amd64.zip
@@ -12,7 +13,7 @@ AWS CLI - v1.19.45
 Python-3 (pip) - v21.0.1
 Ansible - v2.10.7
 Terraform - v0.12.29
-
+Botocore - v1.20.53
 
 #Variables.tf
 
@@ -47,7 +48,7 @@ Third security group is for jenkins worker in us-west-2 allowing 22 from your pu
 
 #Instances.tf
 
-Bootstrapping of jenkins master and worker EC2 instances in the respective regions
+Bootstrapping of jenkins master and worker EC2 instances in the respective regions, runs local provisioner with the respective ansible playbooks in ansbile_templates folder
 Includes AMI Ids via SSM and keypair creation for SSH access via terraform controller
 
 
@@ -56,6 +57,25 @@ Includes AMI Ids via SSM and keypair creation for SSH access via terraform contr
 Outputs the public IP addresses of jenkins master and worker EC2 instances once deployed
 
 
+#Ansible.cfg
+
+Enables dynamic inventory calling in the tf_aws_ec2.yml file via aws_ec2 plugin
+
+
+#Tf_aws_ec2.yml
+
+enables aws_ec2 plugin for dynamic inventory on terraform local provisioner in both regions (us-east-1, us-west-2)
+source: https://raw.githubusercontent.com/linuxacademy/content-deploying-to-aws-ansible-terraform/master/aws_la_cloudplayground_multiple_workers_version/ansible_templates/inventory_aws/tf_aws_ec2.yml
+
+
+#Jenkins-master-sample.yml
+
+playbook that installs git on master EC2 instance (us-east-1) and becomes root user
+
+
+#Jenkins-worker-sample.yml
+
+playbook that installs jq on worker EC2 instances (us-west-2) and becomes root user
 
 
 #Network Diagram available in "images" folder
