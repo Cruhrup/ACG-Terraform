@@ -7,7 +7,7 @@ Terraform link: https://releases.hashicorp.com/terraform/0.12.29/terraform_0.12.
 Ensure the terraform binary is in (/usr/local/bin) path, once uzip'd
 
 
-#Versions included
+#Versions
 
 AWS CLI - v1.19.45
 Python-3 (pip) - v21.0.1
