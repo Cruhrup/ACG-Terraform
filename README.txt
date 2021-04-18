@@ -21,7 +21,7 @@ Listing variables to be used throughout the other Terraform files
 region-master is our master node for jenkins deployed in us-east-1 region
 region-worker is our slave node for jenkins deployed in us-west-2 region
 external_ip is currently utilizing "any" ip, but can set this to your local ip to tighten security
-
+webserver-port on port 80
 
 #Networks.tf
 
@@ -42,7 +42,7 @@ Creates two regions, region-master for jenkins master node in us-east-1 and regi
 #Security_groups.tf
 
 First security group is for load balancer, allowing tcp 80 and 443, with any outbound access in the us-east-1 vpc
-Second security group is for jenkins master in us-east-1 allowing 8080 from load balancer, 22 from anywhere (can dial this down to your public IP in variables for 'external_ip'), any ports from us-west-2 private subnet, and any egress
+Second security group is for jenkins master in us-east-1 allowing 80 (variable 'webserver-port') from load balancer, 22 from anywhere (can dial this down to your public IP in variables for 'external_ip'), any ports from us-west-2 private subnet, and any egress
 Third security group is for jenkins worker in us-west-2 allowing 22 from your public ip, any traffic from us-east-1 private subnet, and any egress
 
 
@@ -54,7 +54,12 @@ Includes AMI Ids via SSM and keypair creation for SSH access via terraform contr
 
 #Outputs.tf
 
-Outputs the public IP addresses of jenkins master and worker EC2 instances once deployed
+Outputs the public IP addresses of jenkins master and worker EC2 instances once deployed, as well as the DNS name of the ALB to test apache webserver
+
+
+#Alb.tf
+Application load balancer over http deployed in us-east-1 running to jenkins-master EC2 instance, health checks every 10 seconds on root directory looking for http status code 200-299
+
 
 
 #Ansible.cfg
@@ -70,7 +75,7 @@ source: https://raw.githubusercontent.com/linuxacademy/content-deploying-to-aws-
 
 #Jenkins-master-sample.yml
 
-playbook that installs git on master EC2 instance (us-east-1) and becomes root user
+playbook that installs/enables httpd (apache) on master EC2 instance (us-east-1) and becomes root user
 
 
 #Jenkins-worker-sample.yml
