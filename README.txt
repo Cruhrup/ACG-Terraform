@@ -95,4 +95,14 @@ Playbook generates ssh key-pair adding our own pub key to authorized_keys file, 
 download jenkins API client from jenkins master, copy over jenkins auth file, use jenkins API client to create creds for the worker and integrate with the master node
 
 
+#Node.j2
+
+Jinja2 template used by worker node to tie to master node
+
+
+#Cred-privkey.j2
+
+Jinja2 template used to define credentials for worker nodes via ssh private keys
+
+
 #Network Diagram available in "images" folder
