@@ -30,6 +30,6 @@ variable "instance-type" {
 
 variable "webserver-port" {
   type    = number
-  default = 80
+  default = 8080
 }
 

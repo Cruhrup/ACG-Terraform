@@ -21,7 +21,7 @@ Listing variables to be used throughout the other Terraform files
 region-master is our master node for jenkins deployed in us-east-1 region
 region-worker is our slave node for jenkins deployed in us-west-2 region
 external_ip is currently utilizing "any" ip, but can set this to your local ip to tighten security
-webserver-port on port 80
+webserver-port on port 8080
 
 #Networks.tf
 
@@ -42,7 +42,7 @@ Creates two regions, region-master for jenkins master node in us-east-1 and regi
 #Security_groups.tf
 
 First security group is for load balancer, allowing tcp 80 and 443, with any outbound access in the us-east-1 vpc
-Second security group is for jenkins master in us-east-1 allowing 80 (variable 'webserver-port') from load balancer, 22 from anywhere (can dial this down to your public IP in variables for 'external_ip'), any ports from us-west-2 private subnet, and any egress
+Second security group is for jenkins master in us-east-1 allowing 8080 (variable 'webserver-port') from load balancer, 22 from anywhere (can dial this down to your public IP in variables for 'external_ip'), any ports from us-west-2 private subnet, and any egress
 Third security group is for jenkins worker in us-west-2 allowing 22 from your public ip, any traffic from us-east-1 private subnet, and any egress
 
 
@@ -73,12 +73,12 @@ enables aws_ec2 plugin for dynamic inventory on terraform local provisioner in b
 source: https://raw.githubusercontent.com/linuxacademy/content-deploying-to-aws-ansible-terraform/master/aws_la_cloudplayground_multiple_workers_version/ansible_templates/inventory_aws/tf_aws_ec2.yml
 
 
-#Jenkins-master-sample.yml
+#Jenkins-master-sample.yml (deprecated, was used for inital testing. Ref Install_jenkins_master.yml)
 
 playbook that installs/enables httpd (apache) on master EC2 instance (us-east-1) and becomes root user
 
 
-#Jenkins-worker-sample.yml
+#Jenkins-worker-sample.yml (deprecated, was used for inital testing. Ref Install_jenkins_worker.yml)
 
 playbook that installs jq on worker EC2 instances (us-west-2) and becomes root user
 
@@ -93,6 +93,7 @@ is running
 
 Playbook generates ssh key-pair adding our own pub key to authorized_keys file, copy over jenkins worker agent xml config file from jinja template, read ssh priv key/copy over jenkins worker creds xml config file/embed the priv key here, install dependencies (same as master node),
 download jenkins API client from jenkins master, copy over jenkins auth file, use jenkins API client to create creds for the worker and integrate with the master node
+Also has a destroy provisioner set after worker is done
 
 
 #Node.j2
@@ -103,6 +104,11 @@ Jinja2 template used by worker node to tie to master node
 #Cred-privkey.j2
 
 Jinja2 template used to define credentials for worker nodes via ssh private keys
+
+
+#Jenkins_auth
+
+Using admin:password for creds for testing
 
 
 #Network Diagram available in "images" folder
