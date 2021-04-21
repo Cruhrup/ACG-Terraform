@@ -82,9 +82,17 @@ playbook that installs/enables httpd (apache) on master EC2 instance (us-east-1)
 
 playbook that installs jq on worker EC2 instances (us-west-2) and becomes root user
 
+
 #Install_jenkins_master.yml
 
 Playbook installs dependencies (wget, git, java), clone jenkins files, setup jenkins repo and GPG key, install jenkins then stop it, delete default install directory and copy over cloned jenkins files, restore ownership to jenkins and restart service, while loop to ensure jenkins
 is running 
+
+
+#Install_jenkins_worker.yml
+
+Playbook generates ssh key-pair adding our own pub key to authorized_keys file, copy over jenkins worker agent xml config file from jinja template, read ssh priv key/copy over jenkins worker creds xml config file/embed the priv key here, install dependencies (same as master node),
+download jenkins API client from jenkins master, copy over jenkins auth file, use jenkins API client to create creds for the worker and integrate with the master node
+
 
 #Network Diagram available in "images" folder
