@@ -82,5 +82,9 @@ playbook that installs/enables httpd (apache) on master EC2 instance (us-east-1)
 
 playbook that installs jq on worker EC2 instances (us-west-2) and becomes root user
 
+#Install_jenkins_master.yml
+
+Playbook installs dependencies (wget, git, java), clone jenkins files, setup jenkins repo and GPG key, install jenkins then stop it, delete default install directory and copy over cloned jenkins files, restore ownership to jenkins and restart service, while loop to ensure jenkins
+is running 
 
 #Network Diagram available in "images" folder
