@@ -32,7 +32,7 @@
 
     - name: Copy over creds.xml and create jenkins credential
       vars:
-        priv_key: "{{ pkey['conent'] | b64decode }}"
+        priv_key: "{{ pkey['content'] | b64decode }}"
         ipv4: "{{ ansible_default_ipv4.address }}"
       template:
         src: cred-privkey.j2

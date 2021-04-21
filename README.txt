@@ -108,7 +108,7 @@ Jinja2 template used to define credentials for worker nodes via ssh private keys
 
 #Jenkins_auth
 
-Using admin:password for creds for testing
+Using admin:password for creds for testing on jenkins login
 
 
 #Network Diagram available in "images" folder
